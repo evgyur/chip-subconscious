@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "subc.observation.v1",
+  "title": "SUBCONSCIOUS Observation",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "id",
+    "source",
+    "evidence_uri",
+    "observed_at",
+    "confidence",
+    "redacted",
+    "summary"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "id": {
+      "type": "string"
+    },
+    "source": {
+      "enum": [
+        "hermes",
+        "openclaw",
+        "goclaw",
+        "mem0g",
+        "project-flow",
+        "manual"
+      ]
+    },
+    "source_adapter": {
+      "type": "string"
+    },
+    "evidence_uri": {
+      "type": "string"
+    },
+    "observed_at": {
+      "type": "string"
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "redacted": {
+      "type": "boolean"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "metadata": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": true
+}

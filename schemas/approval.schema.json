@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "subc.approval.v1",
+  "title": "SUBCONSCIOUS Approval Event",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "intent_id",
+    "decision",
+    "approver",
+    "timestamp"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "intent_id": {
+      "type": "string"
+    },
+    "decision": {
+      "enum": [
+        "approved",
+        "rejected",
+        "cooled",
+        "archived"
+      ]
+    },
+    "approver": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "string"
+    },
+    "source_message_id": {
+      "type": [
+        "string",
+        "integer",
+        "null"
+      ]
+    },
+    "note": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

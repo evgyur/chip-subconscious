@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "subc.build_packet.v1",
+  "title": "SUBCONSCIOUS Build Packet",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "intent_id",
+    "goal",
+    "context",
+    "non_goals",
+    "file_targets",
+    "acceptance_criteria",
+    "tests",
+    "rollback"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "intent_id": {
+      "type": "string"
+    },
+    "goal": {
+      "type": "string"
+    },
+    "context": {
+      "type": "string"
+    },
+    "non_goals": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "file_targets": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "acceptance_criteria": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "tests": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "rollback": {
+      "type": "string"
+    },
+    "source_evidence": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true
+}

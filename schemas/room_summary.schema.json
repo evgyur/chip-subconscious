@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "subc.room_summary.v1",
+  "title": "SUBCONSCIOUS Room Summary",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "status",
+    "lanes",
+    "guardrails"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "status": {
+      "type": "string"
+    },
+    "lanes": {
+      "type": "object",
+      "required": [
+        "ready_pending_approval",
+        "watching",
+        "cooling",
+        "approved",
+        "archived"
+      ]
+    },
+    "guardrails": {
+      "type": "object",
+      "required": [
+        "subconscious_max_state",
+        "approval_required_for_build",
+        "allowed_to_build"
+      ]
+    }
+  },
+  "additionalProperties": true
+}

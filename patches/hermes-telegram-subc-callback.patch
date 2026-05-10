@@ -1,0 +1,11 @@
+diff --git a/gateway/platforms/telegram.py b/gateway/platforms/telegram.py
+--- a/gateway/platforms/telegram.py
++++ b/gateway/platforms/telegram.py
+@@
++# Example only: adapt paths to your Hermes checkout and SUBC_ROOM.
++# Add a CallbackQueryHandler branch for callback_data matching:
++#   subc:y:<token>  -> scripts/subc_transition.py --decision approved
++#   subc:n:<token>  -> scripts/subc_transition.py --decision rejected
++# On approval, call scripts/subc_build_packet.py.
++# After decision, edit the original Telegram message to remove buttons.
++# Keep authorization checks: only trusted users may press these buttons.

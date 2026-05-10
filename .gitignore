@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.env
+.room/
+*.log
+.DS_Store

@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "chat_id": "REPLACE_WITH_TELEGRAM_CHAT_ID",
+  "topics": {
+    "signal_board": {"message_thread_id": 101},
+    "walk_logs": {"message_thread_id": 102},
+    "pending_intents": {"message_thread_id": 103},
+    "approved_builds": {"message_thread_id": 104},
+    "archive": {"message_thread_id": 105}
+  }
+}

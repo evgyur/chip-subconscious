@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "subc.signal.v1",
+  "title": "SUBCONSCIOUS Signal",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "id",
+    "title",
+    "signal_types",
+    "score",
+    "evidence",
+    "status",
+    "updated_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "signal_types": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "friction",
+          "repeat",
+          "excitement",
+          "reuse",
+          "mention",
+          "return",
+          "cooling",
+          "blocker"
+        ]
+      }
+    },
+    "score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 10
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "evidence_uri",
+          "summary"
+        ]
+      }
+    },
+    "status": {
+      "enum": [
+        "note",
+        "watching",
+        "pending_intent",
+        "pending_approval",
+        "approved",
+        "cooling",
+        "rejected",
+        "archived"
+      ]
+    },
+    "updated_at": {
+      "type": "string"
+    },
+    "duplicate_of": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "cooldown_until": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "additionalProperties": true
+}

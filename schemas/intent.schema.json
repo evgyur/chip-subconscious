@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "subc.intent.v1",
+  "title": "SUBCONSCIOUS Pending Intent",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "id",
+    "title",
+    "problem",
+    "evidence",
+    "source_adapters",
+    "suggested_build",
+    "non_goals",
+    "acceptance_criteria",
+    "risk",
+    "confidence",
+    "approval_required",
+    "status"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "problem": {
+      "type": "string"
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "evidence_uri",
+          "summary"
+        ]
+      }
+    },
+    "source_adapters": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "HermesAdapter",
+          "OpenClawAdapter",
+          "Mem0gAdapter",
+          "ProjectFlowAdapter",
+          "ManualAdapter"
+        ]
+      }
+    },
+    "suggested_build": {
+      "type": "string"
+    },
+    "non_goals": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "acceptance_criteria": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "risk": {
+      "type": "string"
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "duplicate_of": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "related_intents": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "approval_required": {
+      "const": true
+    },
+    "status": {
+      "const": "pending_approval"
+    }
+  },
+  "additionalProperties": true
+}
