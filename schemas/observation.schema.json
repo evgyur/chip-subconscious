@@ -18,15 +18,21 @@
       "const": "1.0"
     },
     "id": {
-      "type": "string"
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.:-]+$"
     },
     "source": {
       "enum": [
         "hermes",
+        "hermes-sessions",
+        "correction-mining",
         "openclaw",
+        "openclaw-sessions",
+        "openclaw-semantic",
         "goclaw",
         "mem0g",
         "project-flow",
+        "promise-reality",
         "manual"
       ]
     },

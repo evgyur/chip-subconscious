@@ -23,7 +23,8 @@
       "const": "1.0"
     },
     "id": {
-      "type": "string"
+      "type": "string",
+      "pattern": "^intent_[a-z0-9][a-z0-9_-]{0,120}$"
     },
     "title": {
       "type": "string"
@@ -47,7 +48,12 @@
       "items": {
         "enum": [
           "HermesAdapter",
+          "HermesSessionAdapter",
+          "CorrectionMiningAdapter",
           "OpenClawAdapter",
+          "OpenClawSessionAdapter",
+          "OpenClawSemanticAdapter",
+          "PromiseRealityAdapter",
           "Mem0gAdapter",
           "ProjectFlowAdapter",
           "ManualAdapter"

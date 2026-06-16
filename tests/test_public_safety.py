@@ -47,8 +47,8 @@ class PublicSafetyTests(unittest.TestCase):
         state={'posted':{},'tokens':{}}
         markup=reply_markup_for('intent_demo', state)
         row=markup['inline_keyboard'][0]
-        self.assertEqual(row[0]['text'], '✅ Yes')
-        self.assertEqual(row[1]['text'], '❌ No')
+        self.assertEqual(row[0]['text'], '✅ Да')
+        self.assertEqual(row[1]['text'], '❌ Нет')
         self.assertTrue(row[0]['callback_data'].startswith('subc:y:'))
         self.assertTrue(row[1]['callback_data'].startswith('subc:n:'))
 
