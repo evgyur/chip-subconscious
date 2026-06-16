@@ -16,7 +16,7 @@ def status_for(score: float) -> str:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--room', default=None)
+    ap.add_argument('--room', default='/home/hermes/.hermes/profiles/subc/room')
     ap.add_argument('--id')
     ap.add_argument('--title', required=True)
     ap.add_argument('--summary', required=True)
