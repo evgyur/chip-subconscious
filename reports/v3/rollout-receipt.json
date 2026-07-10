@@ -1,0 +1,35 @@
+{
+  "schema_version": "subc-v3-rollout-receipt/1",
+  "target_alias": "subconscious-supervisor-topic",
+  "target_sha256": "sha256:6729fafa762a7e71df500c13e9b9d54b68180a6e276abdd876a32746297329b2",
+  "sender_transport": "hermes-bot",
+  "test_message_id": 23051,
+  "fetched_back": true,
+  "exact_content_match": true,
+  "content_sha256": "sha256:5012290051622451e419a02918fa48e1dd37008749bbaf859f9b5a057e42ccfb",
+  "test_delivery": true,
+  "product_proposal": false,
+  "second_cycle": {
+    "status": "ok",
+    "scheduled_run_at": "2026-07-10T14:41:26.103247+03:00",
+    "scout_status": "empty",
+    "telegram_delivery_count": 0,
+    "canonical_memory_writes": 0
+  },
+  "rollback_drill": {
+    "old_resumed": true,
+    "new_paused": true,
+    "rollback_state_verified": true,
+    "restored_to_v3_steady": true
+  },
+  "final_state": {
+    "old_job_paused": true,
+    "new_job_enabled": true,
+    "new_schedule": "17 6 * * *",
+    "cron_delivery": "local",
+    "replacement_count": 1,
+    "last_status": "ok",
+    "last_delivery_error": null
+  },
+  "verified_at": "2026-07-10T14:50:35,658654730+03:00"
+}

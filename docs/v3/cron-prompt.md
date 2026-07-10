@@ -69,16 +69,22 @@ python3 scripts/subc_delivery_gate.py \
 ┈ ценность: <expected_value>
 ┈ effort / risk / confidence: <values>
 ┈ дешёвый тест: <cheap_test>
-┈ ответь: accept / reject / skip / save / mute / deep dive
+┈ выбери действие кнопкой ниже
 ```
 
-7. Send only the prepared file through the Hermes bot and retain the structured send result:
+7. Send only the prepared file through the dedicated Telegram adapter. The adapter verifies the configured bot with `getMe`, sends the proposal, and attaches six inline buttons (`Accept`, `Reject`, `Skip`, `Save`, `Mute`, `Deep dive`) bound to the exact proposal instance ID:
 
 ```bash
-hermes send --to "$SUBC_V3_DELIVERY_TARGET" --file "$RUNTIME/outbound.md" --json > "$RUNTIME/send-result.json"
+PROPOSAL_ID="$(python3 -c 'import json,sys; p=json.load(open(sys.argv[1])); print(p["allowed_proposals"][0]["proposal_instance_id"])' "$RUNTIME/delivery-gate.json")"
+python3 scripts/subc_v3_telegram.py send \
+  --target "$SUBC_V3_DELIVERY_TARGET" \
+  --proposal-id "$PROPOSAL_ID" \
+  --text-file "$RUNTIME/outbound.md" \
+  --expected-bot-username "${SUBC_V3_EXPECTED_BOT_USERNAME:?missing expected bot username}" \
+  --output "$RUNTIME/send-result.json"
 ```
 
-Treat a non-zero exit, malformed JSON, missing positive Telegram message ID, or mismatched outbound content hash as a failed send. Do not commit delivery state on failure. During rollout, the standard `/goal` executor must fetch back the exact message through the canonical read-only telegram-chip runtime before accepting the canary.
+Treat a non-zero exit, malformed JSON, missing positive Telegram message ID, `button_count != 6`, or mismatched outbound content hash as a failed send. Do not commit delivery state on failure. During rollout, the standard `/goal` executor must fetch back the exact message through the canonical read-only telegram-chip runtime before accepting the canary.
 
 8. Only after the structured send succeeds, commit the same delivery decision:
 

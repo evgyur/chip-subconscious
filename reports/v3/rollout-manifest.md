@@ -31,6 +31,8 @@ This manifest authorizes only the reversible v2-to-v3 scheduler swap described b
       "scripts/subc_guardian.py",
       "scripts/subc_scout.py",
       "scripts/subc_delivery_gate.py",
+      "scripts/subc_v3_feedback.py",
+      "scripts/subc_v3_telegram.py",
       "scripts/subc_verify_rollout_approval.py",
       "scripts/subc_v3_rollout.py",
       "scripts/subc_v3_verify_cron.py",

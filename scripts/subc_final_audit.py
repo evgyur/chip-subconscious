@@ -6,6 +6,9 @@ import json
 from pathlib import Path
 from typing import Any
 
+from subc_v3_verify_cron import verify_cron_state
+from subc_v3_verify_delivery import verify_delivery_receipt
+
 
 def audit_artifacts(repo_root: str | Path) -> tuple[list[str], dict[str, Any]]:
     root = Path(repo_root)
@@ -49,12 +52,24 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Audit SUBCONSCIOUS v3 rollout artifacts")
     parser.add_argument("--package", required=True)
     parser.add_argument("--repo-root", default=".")
+    parser.add_argument("--manifest", default="reports/v3/rollout-manifest.md")
+    parser.add_argument("--receipt", default="reports/v3/rollout-receipt.json")
+    parser.add_argument("--jobs")
     parser.add_argument("--output", default="reports/v3/final-audit.json")
     args = parser.parse_args()
+
     errors, evidence = audit_artifacts(args.repo_root)
+    cron_errors, cron_evidence = verify_cron_state(args.manifest, jobs_path=args.jobs)
+    delivery_errors = verify_delivery_receipt(args.receipt, args.manifest)
+    errors.extend(f"cron:{error}" for error in cron_errors)
+    errors.extend(f"delivery:{error}" for error in delivery_errors)
+    evidence["cron"] = cron_evidence
+    evidence["cron_verified"] = not cron_errors
+    evidence["delivery_receipt_verified"] = not delivery_errors
     evidence["package_present"] = Path(args.package).is_dir()
     if not evidence["package_present"]:
         errors.append("package_missing")
+    errors = list(dict.fromkeys(errors))
     evidence["errors"] = errors
     evidence["passed"] = not errors
     Path(args.output).write_text(json.dumps(evidence, indent=2, sort_keys=True) + "\n")

@@ -1,0 +1,11 @@
+{
+  "cron_delivery": "local",
+  "new_job_enabled": true,
+  "new_job_id": "03ca41b81ef0",
+  "old_job_enabled": false,
+  "old_job_paused": true,
+  "replacement_count": 1,
+  "schedule": "17 6 * * *",
+  "schema_version": "subc-v3-rollout-state/1",
+  "stage": "steady"
+}

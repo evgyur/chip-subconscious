@@ -122,6 +122,16 @@ class RolloutStateTests(unittest.TestCase):
             errors, _ = verify_rollout_state(manifest, jobs_path=jobs, expected_stage="canary")
             self.assertIn("old_job_not_paused", errors)
 
+    def test_rollback_old_stage_requires_old_enabled_and_new_paused(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            manifest = write_manifest(root)
+            jobs = write_jobs(root, old_enabled=True, new_enabled=False, schedule="17 6 * * *")
+            errors, evidence = verify_rollout_state(manifest, jobs_path=jobs, expected_stage="rollback-old")
+            self.assertEqual(errors, [])
+            self.assertTrue(evidence["old_job_enabled"])
+            self.assertFalse(evidence["new_job_enabled"])
+
 
 class CronVerificationTests(unittest.TestCase):
     def test_final_cron_is_weekly_local_and_not_duplicated(self):

@@ -46,6 +46,7 @@ def validate_manifest(
     if data.get("schema_version") != "subc-v3-rollout-manifest/1":
         errors.append("schema_version_invalid")
     old = data.get("old_job", {})
+    replacement = data.get("replacement", {})
     if old.get("action") != "pause":
         errors.append("old_job_action_must_be_pause")
     if old.get("delete") is not False:
@@ -54,14 +55,24 @@ def validate_manifest(
     if target is None:
         errors.append("old_job_not_found")
     else:
-        if bool(target.get("enabled")) is not bool(old.get("expected_enabled")):
+        expected_enabled = bool(old.get("expected_enabled"))
+        enabled_mismatch = bool(target.get("enabled")) is not expected_enabled
+        steady_job = next((job for job in jobs if job.get("name") == replacement.get("name")), None)
+        steady_schedule = (steady_job or {}).get("schedule") or {}
+        rolled_out_steady = bool(
+            target.get("enabled") is False
+            and target.get("state") == "paused"
+            and steady_job
+            and steady_job.get("enabled") is True
+            and steady_job.get("deliver") == "local"
+            and (steady_schedule.get("expr") or steady_schedule.get("display")) == replacement.get("steady_schedule")
+        )
+        if enabled_mismatch and not rolled_out_steady:
             errors.append("old_job_enabled_state_mismatch")
         actual_target_hash = "sha256:" + hashlib.sha256(str(target.get("deliver")).encode()).hexdigest()
-        replacement = data.get("replacement", {})
         if actual_target_hash != replacement.get("delivery_target_sha256"):
             errors.append("delivery_target_hash_mismatch")
 
-    replacement = data.get("replacement", {})
     if replacement.get("weekly_proposal_cap") != 3:
         errors.append("weekly_proposal_cap_must_be_three")
     if replacement.get("canary_schedule") != "every 5m":

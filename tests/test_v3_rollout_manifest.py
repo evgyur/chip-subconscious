@@ -33,7 +33,10 @@ class V3RolloutManifestTests(unittest.TestCase):
         baseline.write_text("old_job_id: oldjob\nbaseline_public_sha: abcdef\n")
         scripts = root / "scripts"
         scripts.mkdir()
-        for name in ("subc_live_projection.py", "subc_scout.py", "subc_delivery_gate.py"):
+        for name in (
+            "subc_live_projection.py", "subc_scout.py", "subc_delivery_gate.py",
+            "subc_v3_telegram.py", "subc_v3_feedback.py",
+        ):
             (scripts / name).write_text("# test\n")
         docs = root / "docs/v3"
         docs.mkdir(parents=True)
@@ -50,7 +53,10 @@ class V3RolloutManifestTests(unittest.TestCase):
                 "delivery_target_alias": "subconscious-supervisor-topic",
                 "delivery_target_sha256": "sha256:b44d0cd8336a21e52ace1d2c1ea8b30db8ab7febec342c0751663a7d4aebed29",
                 "workdir": "${HOME}/workspace/chip-subconscious-v3", "prompt_file": "docs/v3/cron-prompt.md",
-                "scripts": ["scripts/subc_live_projection.py", "scripts/subc_scout.py", "scripts/subc_delivery_gate.py"],
+                "scripts": [
+                    "scripts/subc_live_projection.py", "scripts/subc_scout.py", "scripts/subc_delivery_gate.py",
+                    "scripts/subc_v3_telegram.py", "scripts/subc_v3_feedback.py",
+                ],
                 "weekly_proposal_cap": 3,
             },
             "activation_steps": ["pause_old", "create_disabled", "enable_canary", "test_delivery", "readback", "second_scheduler_cycle", "set_steady_schedule"],
@@ -66,6 +72,25 @@ class V3RolloutManifestTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             cron, shadow, backtest, _ = self._files(root)
+            errors = validate_manifest(self._manifest(root), cron_jobs=cron, repo_root=root, shadow_report=shadow, backtest_report=backtest)
+            self.assertEqual(errors, [])
+
+    def test_manifest_remains_valid_after_verified_steady_rollout(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            cron, shadow, backtest, _ = self._files(root)
+            jobs = json.loads(cron.read_text())
+            jobs["jobs"][0]["enabled"] = False
+            jobs["jobs"][0]["state"] = "paused"
+            jobs["jobs"].append({
+                "id": "newjob",
+                "name": "SUBCONSCIOUS v3 Scout",
+                "enabled": True,
+                "state": "scheduled",
+                "schedule": {"kind": "cron", "expr": "17 6 * * *", "display": "17 6 * * *"},
+                "deliver": "local",
+            })
+            cron.write_text(json.dumps(jobs))
             errors = validate_manifest(self._manifest(root), cron_jobs=cron, repo_root=root, shadow_report=shadow, backtest_report=backtest)
             self.assertEqual(errors, [])
 
@@ -96,11 +121,14 @@ class V3RolloutManifestTests(unittest.TestCase):
             shadow.write_text(json.dumps(report))
             self.assertIn("telegram_deliveries_nonzero", assert_no_live_mutation(baseline, shadow))
 
-    def test_cron_contract_sends_before_committing_delivery_state(self):
+    def test_cron_contract_sends_six_buttons_before_committing_delivery_state(self):
         prompt = (ROOT / "docs/v3/cron-prompt.md").read_text()
-        self.assertIn("hermes send", prompt)
+        send_command = "subc_v3_telegram.py send"
+        self.assertIn(send_command, prompt)
+        self.assertIn("allowed_proposals", prompt)
+        self.assertIn("button_count", prompt)
         self.assertIn("fetch back", prompt.lower())
-        self.assertLess(prompt.index("hermes send"), prompt.rindex("--commit"))
+        self.assertLess(prompt.index(send_command), prompt.rindex("--commit"))
         self.assertIn("cron delivery is `local`", prompt.lower())
 
 
