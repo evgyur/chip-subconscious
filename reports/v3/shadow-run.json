@@ -1,0 +1,103 @@
+{
+  "backtest_gate_pass": true,
+  "candidate_count": 1,
+  "candidate_review": [
+    {
+      "confidence": 0.82,
+      "domain": "finance",
+      "duplication": "pass",
+      "novelty": "pass",
+      "privacy": "pass",
+      "problem_fingerprint": "sha256:850d1032bec11c8954554bc222538db8bd9320772d48033c2238ca4c0956da6f",
+      "proposal_instance_id": "prp_f561a2aac93aa5054410f53b",
+      "value": "pass"
+    }
+  ],
+  "canonical_memory_writes": 0,
+  "cron_changes": 0,
+  "live_mutation_detected": false,
+  "mode": "read_only",
+  "mutation_checks": {
+    "cron_target_unchanged": true,
+    "provider_config_unchanged": true,
+    "room_unchanged": true
+  },
+  "observation_pass_count": 2,
+  "passes": [
+    {
+      "context_hash": "sha256:03e1723b0c34a0aa58b095a1081fcf73d09e8073580cc1aeafab39dff615e312",
+      "eligible_events": 6,
+      "lane_counts": {
+        "reflex": 5,
+        "scout": 1
+      },
+      "pass": 1,
+      "snapshot": {
+        "cron_target": {
+          "delivery_target_hash": "sha256:6729fafa762a7e71df500c13e9b9d54b68180a6e276abdd876a32746297329b2",
+          "enabled": true,
+          "id": "fb2ae09c0d59",
+          "model": "MiniMax-M2.7-highspeed",
+          "prompt_hash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "provider": "minimax",
+          "schedule": {
+            "display": "0 6,12,18 * * *",
+            "expr": "0 6,12,18 * * *",
+            "kind": "cron"
+          },
+          "script_hash": "sha256:a8c60d81a2bd34b9e459a443a746cfb660005274749c7237656229f06a6fcf54",
+          "snapshot_hash": "sha256:6d7c8510eed27729723d2e3a2998cea4535cc83581a4ca4bcc0eec7c664163ed"
+        },
+        "provider_config_hash": "sha256:06aceb14ce6d8f4730abd27bb30e83449c83edfffc6096cefa63e83ff08f3444",
+        "room_file_count": 541,
+        "room_hash": "sha256:fa467708ed83619b0e0a5e6cd9621f540d8d33af2055ad1a17f95cdc67d37f4e"
+      }
+    },
+    {
+      "context_hash": "sha256:03e1723b0c34a0aa58b095a1081fcf73d09e8073580cc1aeafab39dff615e312",
+      "eligible_events": 6,
+      "lane_counts": {
+        "reflex": 5,
+        "scout": 1
+      },
+      "pass": 2,
+      "snapshot": {
+        "cron_target": {
+          "delivery_target_hash": "sha256:6729fafa762a7e71df500c13e9b9d54b68180a6e276abdd876a32746297329b2",
+          "enabled": true,
+          "id": "fb2ae09c0d59",
+          "model": "MiniMax-M2.7-highspeed",
+          "prompt_hash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "provider": "minimax",
+          "schedule": {
+            "display": "0 6,12,18 * * *",
+            "expr": "0 6,12,18 * * *",
+            "kind": "cron"
+          },
+          "script_hash": "sha256:a8c60d81a2bd34b9e459a443a746cfb660005274749c7237656229f06a6fcf54",
+          "snapshot_hash": "sha256:6d7c8510eed27729723d2e3a2998cea4535cc83581a4ca4bcc0eec7c664163ed"
+        },
+        "provider_config_hash": "sha256:06aceb14ce6d8f4730abd27bb30e83449c83edfffc6096cefa63e83ff08f3444",
+        "room_file_count": 541,
+        "room_hash": "sha256:fa467708ed83619b0e0a5e6cd9621f540d8d33af2055ad1a17f95cdc67d37f4e"
+      }
+    }
+  ],
+  "provider_config_changes": 0,
+  "schema_version": "subc-v3-shadow-report/1",
+  "semantic_status": "selected",
+  "shadow_gate_pass": true,
+  "source_coverage": {
+    "eligible": 6,
+    "excluded_compaction": 7,
+    "excluded_duplicate": 2,
+    "excluded_no_scout_signal": 4,
+    "excluded_one_shot_command": 5,
+    "excluded_short_or_command": 5,
+    "excluded_system_injection": 11,
+    "queried_owner_messages": 40,
+    "source_status": "available"
+  },
+  "state_writes": 0,
+  "telegram_deliveries": 0
+}

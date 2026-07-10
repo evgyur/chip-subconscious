@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/subconscious/v3_event.schema.json",
+  "title": "SUBCONSCIOUS v3 governed event",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "event_id", "event_type", "lane", "source", "evidence", "raw_content_included", "model_egress"],
+  "properties": {
+    "schema_version": {"const": "subc-v3-event/1"},
+    "event_id": {"type": "string", "pattern": "^evt_[a-f0-9]{16,64}$"},
+    "event_type": {
+      "enum": ["correction", "repeated_work", "commitment", "unfinished_work", "project_risk", "memory_signal", "service_health", "config_health", "cron_health"]
+    },
+    "lane": {"enum": ["reflex", "scout", "guardian"]},
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_class", "source_ref_hash", "observed_at", "authority", "privacy_class"],
+      "properties": {
+        "source_class": {"enum": ["session_projection", "commitment_projection", "project_state", "memory_projection", "operator_feedback", "service_probe", "config_probe", "cron_probe"]},
+        "source_ref_hash": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+        "observed_at": {"type": "string", "format": "date-time"},
+        "authority": {"enum": ["projection", "operator", "canonical_state", "probe"]},
+        "privacy_class": {"enum": ["green", "yellow", "red"]}
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["fingerprint", "kind"],
+        "properties": {
+          "fingerprint": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+          "kind": {"enum": ["redacted_summary", "state_transition", "aggregate_metric", "probe_result"]},
+          "safe_summary": {"type": "string", "minLength": 1, "maxLength": 500}
+        }
+      }
+    },
+    "raw_content_included": {"const": false},
+    "model_egress": {"enum": ["disabled", "local_redacted_only", "approved_governed_api"]}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"event_type": {"enum": ["service_health", "config_health", "cron_health"]}}, "required": ["event_type"]},
+      "then": {"properties": {"lane": {"const": "guardian"}}}
+    },
+    {
+      "if": {"properties": {"event_type": {"enum": ["correction", "repeated_work"]}}, "required": ["event_type"]},
+      "then": {"properties": {"lane": {"enum": ["reflex", "scout"]}}}
+    },
+    {
+      "if": {"properties": {"event_type": {"enum": ["commitment", "unfinished_work", "project_risk", "memory_signal"]}}, "required": ["event_type"]},
+      "then": {"properties": {"lane": {"const": "scout"}}}
+    }
+  ]
+}

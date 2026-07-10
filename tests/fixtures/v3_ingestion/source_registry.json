@@ -1,0 +1,13 @@
+{
+  "schema_version": "subc-v3-source-registry/1",
+  "owner_identity_hash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+  "sources": [
+    {"source_id": "hermes_sessions", "source_class": "session_projection", "authority": "projection", "privacy_class": "yellow", "enabled": true, "available": true},
+    {"source_id": "commitments", "source_class": "commitment_projection", "authority": "canonical_state", "privacy_class": "yellow", "enabled": true, "available": true},
+    {"source_id": "project_flow", "source_class": "project_state", "authority": "canonical_state", "privacy_class": "yellow", "enabled": true, "available": true},
+    {"source_id": "cron_incidents", "source_class": "cron_probe", "authority": "probe", "privacy_class": "yellow", "enabled": true, "available": true},
+    {"source_id": "memory_projection", "source_class": "memory_projection", "authority": "projection", "privacy_class": "yellow", "enabled": true, "available": true},
+    {"source_id": "project_archive", "source_class": "project_state", "authority": "projection", "privacy_class": "yellow", "enabled": true, "available": false}
+  ],
+  "rejected_origin_kinds": ["cron_prompt", "subagent", "system", "compaction", "transcript", "assistant_injection"]
+}

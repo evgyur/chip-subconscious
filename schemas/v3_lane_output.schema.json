@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/subconscious/v3_lane_output.schema.json",
+  "title": "SUBCONSCIOUS v3 disjoint lane output",
+  "oneOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "output_type", "reflex_id", "candidate_kind", "evidence_fingerprints", "safe_summary", "writes_canonical_memory"],
+      "properties": {
+        "schema_version": {"const": "subc-v3-lane-output/1"},
+        "output_type": {"const": "reflex_candidate"},
+        "reflex_id": {"type": "string", "pattern": "^rfx_[a-f0-9]{16,64}$"},
+        "candidate_kind": {"enum": ["memory", "skill", "eval", "workflow"]},
+        "evidence_fingerprints": {"type": "array", "minItems": 1, "maxItems": 10, "uniqueItems": true, "items": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"}},
+        "safe_summary": {"type": "string", "minLength": 1, "maxLength": 500},
+        "writes_canonical_memory": {"const": false}
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "output_type", "proposal_instance_id", "problem_fingerprint", "domain", "title", "why_now", "expected_value", "effort", "risk", "confidence", "cheap_test", "evidence", "writes_canonical_memory"],
+      "properties": {
+        "schema_version": {"const": "subc-v3-lane-output/1"},
+        "output_type": {"const": "scout_proposal"},
+        "proposal_instance_id": {"type": "string", "pattern": "^prp_[a-f0-9]{16,64}$"},
+        "problem_fingerprint": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+        "domain": {"enum": ["human20", "business", "product", "team_ops", "personal_ops", "travel", "finance", "health", "other_domain"]},
+        "title": {"type": "string", "minLength": 8, "maxLength": 160},
+        "why_now": {"type": "string", "minLength": 8, "maxLength": 500},
+        "expected_value": {"type": "string", "minLength": 8, "maxLength": 500},
+        "effort": {"enum": ["small", "medium", "large"]},
+        "risk": {"enum": ["low", "medium", "high"]},
+        "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+        "cheap_test": {"type": "string", "minLength": 8, "maxLength": 500},
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 5,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["fingerprint", "safe_ref"],
+            "properties": {
+              "fingerprint": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+              "safe_ref": {"type": "string", "minLength": 1, "maxLength": 160}
+            }
+          }
+        },
+        "writes_canonical_memory": {"const": false}
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "output_type", "incident_id", "severity", "component", "safe_summary", "evidence_fingerprints", "writes_canonical_memory"],
+      "properties": {
+        "schema_version": {"const": "subc-v3-lane-output/1"},
+        "output_type": {"const": "guardian_incident"},
+        "incident_id": {"type": "string", "pattern": "^grd_[a-f0-9]{16,64}$"},
+        "severity": {"enum": ["info", "warning", "critical"]},
+        "component": {"type": "string", "minLength": 1, "maxLength": 100},
+        "safe_summary": {"type": "string", "minLength": 1, "maxLength": 500},
+        "evidence_fingerprints": {"type": "array", "minItems": 1, "maxItems": 20, "uniqueItems": true, "items": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"}},
+        "writes_canonical_memory": {"const": false}
+      }
+    }
+  ]
+}

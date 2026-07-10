@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/subconscious/v3_feedback.schema.json",
+  "title": "SUBCONSCIOUS v3 proposal feedback",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "feedback_id", "proposal_instance_id", "action", "recorded_at", "actor_ref_hash", "creates_promotion_request", "writes_canonical_memory"],
+  "properties": {
+    "schema_version": {"const": "subc-v3-feedback/1"},
+    "feedback_id": {"type": "string", "pattern": "^fbk_[a-f0-9]{16,64}$"},
+    "proposal_instance_id": {"type": "string", "pattern": "^prp_[a-f0-9]{16,64}$"},
+    "action": {"enum": ["save", "skip", "mute", "promote", "deep_dive", "accept", "reject"]},
+    "recorded_at": {"type": "string", "format": "date-time"},
+    "actor_ref_hash": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "reason": {"type": "string", "maxLength": 500},
+    "creates_promotion_request": {"type": "boolean"},
+    "writes_canonical_memory": {"const": false}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"action": {"const": "promote"}}, "required": ["action"]},
+      "then": {"properties": {"creates_promotion_request": {"const": true}}}
+    }
+  ]
+}

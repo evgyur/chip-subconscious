@@ -1,0 +1,237 @@
+{
+  "schema_version": "subc-v3-baseline/1",
+  "captured_at": "2026-07-10T10:24:00Z",
+  "audit_window": [
+    "2026-06-10",
+    "2026-07-10"
+  ],
+  "public_baseline": {
+    "repository": "evgyur/chip-subconscious",
+    "visibility": "PUBLIC",
+    "branch": "main",
+    "sha": "4bc52a2e23c46b5dd660eb2a13c3ee0c244d58d4"
+  },
+  "execution_checkout": {
+    "branch": "supergoal/subconscious-v3-reset",
+    "clean_clone": true
+  },
+  "live_boundary": {
+    "is_git": false,
+    "policy": "read-only evidence source; never initialize or bulk-add",
+    "raw_private_data_committed": false
+  },
+  "audit_metrics": {
+    "walk_reports": 92,
+    "empty_walk_reports": 86,
+    "empty_rate_percent": 93.5,
+    "approvals": 9,
+    "proactive_domain_recommendations": 0,
+    "walk_runs": 94,
+    "observations": 3472,
+    "unique_evidence": 51,
+    "duplicate_rate_percent": 98.53,
+    "source_class_percent": {
+      "static_health_inventory": 94.76,
+      "meta_failure_handoff": 4.61,
+      "behavior_user": 0.63
+    }
+  },
+  "source_drift": {
+    "live_only_count": 16,
+    "different_count": 20,
+    "same_count": 1,
+    "live_only": [
+      {
+        "path": "references/openclaw-session-sensing-plan.md",
+        "live_sha256": "bf957db22e335e8ea884b828b507c9ca323dc3b3413c537d99b2810978d0cfd7"
+      },
+      {
+        "path": "scripts/openclaw_session_health.py",
+        "live_sha256": "1e4898752326227bece0d0677a7ca2156402275fb89232d9b78c6bfe0ef3f65f"
+      },
+      {
+        "path": "scripts/subc_cron_digest.py",
+        "live_sha256": "00b624442d15f5b002f5ee680d81ad7f7232c061d4f2a33a87356f50868d7d5c"
+      },
+      {
+        "path": "scripts/subc_shaw_enqueue.py",
+        "live_sha256": "cb71299a087de197319082a32fa103aceb218f5d6374eb1a81be30590027a752"
+      },
+      {
+        "path": "scripts/subc_shaw_watchdog.py",
+        "live_sha256": "50b3162392dd5edc465c6e954135f953b5e1f5977a0bd4c2990e442197b3cdd7"
+      },
+      {
+        "path": "scripts/subc_shaw_worker.py",
+        "live_sha256": "0e76b224b8a2eca7110ca1aa0fb7955243c297a08f7feebfa482c4c18a22d708"
+      },
+      {
+        "path": "tests/test_cron_digest.py",
+        "live_sha256": "cb0ee78e91ba1bad98021d55648e8efae2547803a83411cb644fabb1834cc80d"
+      },
+      {
+        "path": "tests/test_hermes_session_adapter.py",
+        "live_sha256": "d25a282e151a9c10e82c37f3375ae52ed39e153e2c09b8f9db40419df5a58d08"
+      },
+      {
+        "path": "tests/test_pending_publish_ux.py",
+        "live_sha256": "a979e1c054fa1259a0ad415ba7bd7bf5090d22b6b7bd2cd6f38e0ae934e2d3c2"
+      },
+      {
+        "path": "tests/test_publish_pending.py",
+        "live_sha256": "7ae5c4aa40ee72bf6141d6460d0909f808d5526878c188fd1f7cce9a06984bac"
+      },
+      {
+        "path": "tests/test_schema_drift.py",
+        "live_sha256": "f6e705d33f723ae7e14700f02817d0394fd471309aef41da8a7efeba07566a42"
+      },
+      {
+        "path": "tests/test_shaw_enqueue.py",
+        "live_sha256": "a963598b9b8096e80377dcfd149825f850287e780f1618c12386d6191026de8c"
+      },
+      {
+        "path": "tests/test_shaw_worker_prompt.py",
+        "live_sha256": "c4d37e8a42b200107140d030737cec43dcfb54c77b18c492744203a12d6f28c0"
+      },
+      {
+        "path": "tests/test_subc_v2_completion.py",
+        "live_sha256": "df34455c4686e4c18419e93dcb73a08b3e1854e421e22adb3a694b70ef8c90c4"
+      },
+      {
+        "path": "tests/test_verify_shaw_run.py",
+        "live_sha256": "3b93bcc1ae8dc76a6b240b51dc729a97c1c9ebad4752ee56be518fe4630169b7"
+      },
+      {
+        "path": "tests/test_walk_board.py",
+        "live_sha256": "ce4862e0be42e3eb0fa3e42e3f6d69c142c3aff88efb67d7ce66e18fa3c80878"
+      }
+    ],
+    "different": [
+      {
+        "path": "schemas/approval.schema.json",
+        "live_sha256": "e883a09916844a4d58a7e4acec35b9a99e78a72348a8eeca34f3ae982a7b8dc9",
+        "public_sha256": "39f33849ce597209c15da03b64de35cac59c6cc8fec3e4dd279d0e10ae4bc576"
+      },
+      {
+        "path": "schemas/build_packet.schema.json",
+        "live_sha256": "9151eb10f3aba2b28439f76e6572ee2bd8654232f886037594e8e029e5962dbe",
+        "public_sha256": "8794c796762f08042ba0ba85f078dc482831aa85a0bcc67af591b20bbf0a04fd"
+      },
+      {
+        "path": "schemas/intent.schema.json",
+        "live_sha256": "19d3871cc88959350a2d3779cfb6ddea48e2db09ee153b4cffb9b61c61b01c80",
+        "public_sha256": "7a5da4e07138207ca08fa8fc2c1c4291496340f3d1445bb6ed841885aa43f139"
+      },
+      {
+        "path": "schemas/observation.schema.json",
+        "live_sha256": "87091b22bee2df1534ebdf934eda193ee64ed5a3abff6dbd0875dab3435a1613",
+        "public_sha256": "d2ed3858909a5a01ac9d4421366eea6292742c61d09dafef1405d12a1084e50f"
+      },
+      {
+        "path": "schemas/room_summary.schema.json",
+        "live_sha256": "adf01690cb87a04931642969f847f67567a142f49da8dbc276cc64905778f2c4",
+        "public_sha256": "ed49ef83bcac43166f813f7572dde8500cc52ffd7442fb1a16df839e5a052067"
+      },
+      {
+        "path": "scripts/subc_adapters.py",
+        "live_sha256": "53b45ea58a50eca46c377dd97d8196b4e9ea58b9c75fb4bbad93600bd897bccf",
+        "public_sha256": "e2d1e04e815e21b1f9691e2cd792e2885976c699fd161749305db08c311a159a"
+      },
+      {
+        "path": "scripts/subc_add_signal.py",
+        "live_sha256": "352e870fccfe9f87c1bba4ce5b25e3b10aaaffd66361f53ac8cd2ca0eb7efa0a",
+        "public_sha256": "1318fb5f4248fa929637433caa4cbc76f0d326e2b880ffbbb810539fc45cc354"
+      },
+      {
+        "path": "scripts/subc_build_packet.py",
+        "live_sha256": "4c0a8bc684b563bcad7939ccedec4a74cf8a44caefc7d4b906405046994b13b4",
+        "public_sha256": "91509dbf3c278900ccfafb70a4350077ab4344817fdd0392f7c4e821f7e03b7c"
+      },
+      {
+        "path": "scripts/subc_common.py",
+        "live_sha256": "f198cfaa0a12a83ed24d6f3222203b091043b2cdcd2c601ab1e4c58e611d3670",
+        "public_sha256": "c0f8c6e085a777736bc9a1a5da12b05489e40689ca4548e3c02fef793b351ec5"
+      },
+      {
+        "path": "scripts/subc_intents.py",
+        "live_sha256": "38f2c1a5ec6a2c01d9a3c51920383c5301dd695ed763b2afefc160d47abfe000",
+        "public_sha256": "bbf1f8409af8f6c5df67fe20f203e72122b3bb37b57caa40093424f0d723e673"
+      },
+      {
+        "path": "scripts/subc_publish.py",
+        "live_sha256": "9ff785f4bc7c808f4499a21c3e71f5db35c2ad8f0be4080c5732048e2d77cccf",
+        "public_sha256": "27ace20f59fe4389f16f41440eb03ca00246b8ee63408b574910032e96c0505e"
+      },
+      {
+        "path": "scripts/subc_publish_pending.py",
+        "live_sha256": "bab3eba5331965a4b74f68fb25214020f1e474e253060bc32dddfe5b184d4009",
+        "public_sha256": "4b905b270bf26df143a50aae88452ed26febf0ecb356aafff96943802633f940"
+      },
+      {
+        "path": "scripts/subc_score.py",
+        "live_sha256": "52b30c84ff176983615aa34053e9ec63ee9d7b1b62f896072c76cc5f398a63d0",
+        "public_sha256": "9ba763d144cd2a506b8d384c9b8e09571a8a4aeb981191a48e935627a1f52592"
+      },
+      {
+        "path": "scripts/subc_transition.py",
+        "live_sha256": "29ad9432e415789e4e755cecff694a1405bd403cb0803385fd1c38cf8d2d52bd",
+        "public_sha256": "3394678e24e27d0c72c4f6ca026fcec0a1122567d48bc149d5c8eb9731c0de3d"
+      },
+      {
+        "path": "scripts/subc_validate.py",
+        "live_sha256": "adc0d2181d11710cbe5a09080ca3fc6c2fbaa7f86e0886547f9779346ebd1ce9",
+        "public_sha256": "d2140278d950f78d9c0c7c596c7330b3cb9f0ab01439622a99ac724b65cf4ed2"
+      },
+      {
+        "path": "scripts/subc_walk.py",
+        "live_sha256": "9e6589af3c3ff51151f52273363445533f6e1cda1c23c35be9e3e7a7e71e75e8",
+        "public_sha256": "b80f7ae233619c59c7f6170d5d026375f209155937542483ce7a92f482eeebce"
+      },
+      {
+        "path": "tests/test_build_packet.py",
+        "live_sha256": "180c525d42ac962f69646b5bdd4e01a9fd285dd3e63c2366871aa946db2abea1",
+        "public_sha256": "6366ccd768cb89d429961fd4feecf77b56b9217f7202d87acaead2d54189e527"
+      },
+      {
+        "path": "tests/test_scoring_intents_routes.py",
+        "live_sha256": "667b22ad955ca095057279ce19362a01d55be9e50b9bef487c29c3436217339c",
+        "public_sha256": "d4ab9244f58394353e2cd5936e60c41396552d1ebb8c5ebdde76f127f5afb128"
+      },
+      {
+        "path": "tests/test_subc_core.py",
+        "live_sha256": "de6fc7ebb3ce7885fbd559caa14aaa1848318cf8e08ccc23f62944c6d195395f",
+        "public_sha256": "78118b05af19075c6405e8424821f1a6cbdd7e9d8bd1d7223eb4ae007f5efa50"
+      },
+      {
+        "path": "tests/test_transitions.py",
+        "live_sha256": "ba44a9397d87db7dbb96b3f2a29080f027aaa0823823dd185edb5e61c0697158",
+        "public_sha256": "f0c67bcde55bee20c487a926b49b2bb03622d778cfdeb95b2d1a4c2392a6a5c2"
+      }
+    ]
+  },
+  "live_cron_snapshot": {
+    "job_id_sha256": "9fa6398414d3d504a31cb2a397e9d8a744cc18fad81867428d4d161150bdfb25",
+    "name": "SUBCONSCIOUS walks",
+    "schedule": "0 6,12,18 * * *",
+    "script": "subc_cron_walk.sh",
+    "no_agent": true,
+    "enabled": true,
+    "state": "scheduled",
+    "delivery": "private Telegram topic (redacted)",
+    "last_status": "ok"
+  },
+  "room_schema_snapshot": {
+    "room_exists": true,
+    "top_level_file_count": 11,
+    "top_level_dir_count": 6,
+    "summary_top_level_keys": [
+      "guardrails",
+      "lanes",
+      "schema_version",
+      "status",
+      "updated_at"
+    ],
+    "raw_content_captured": false
+  },
+  "privacy_contract": "aggregate metrics, redacted pointers, hashes and public-safe paths only; no raw room/session/Telegram content"
+}

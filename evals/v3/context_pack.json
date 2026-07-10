@@ -1,0 +1,55 @@
+{
+  "schema_version": "subc-v3-context-pack/1",
+  "events": [
+    {
+      "schema_version": "subc-v3-event/1",
+      "event_id": "evt_1111111111111111",
+      "event_type": "project_risk",
+      "lane": "scout",
+      "source": {"source_class": "project_state", "source_ref_hash": "sha256:1111111111111111111111111111111111111111111111111111111111111111", "observed_at": "2026-06-12T10:00:00Z", "authority": "canonical_state", "privacy_class": "yellow"},
+      "evidence": [{"fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "kind": "redacted_summary", "safe_summary": "Lesson publishing repeats several manual verification steps"}],
+      "raw_content_included": false,
+      "model_egress": "approved_governed_api"
+    },
+    {
+      "schema_version": "subc-v3-event/1",
+      "event_id": "evt_2222222222222222",
+      "event_type": "commitment",
+      "lane": "scout",
+      "source": {"source_class": "commitment_projection", "source_ref_hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222", "observed_at": "2026-06-18T10:00:00Z", "authority": "canonical_state", "privacy_class": "yellow"},
+      "evidence": [{"fingerprint": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", "kind": "redacted_summary", "safe_summary": "Publishing quality checks remain an open recurring commitment"}],
+      "raw_content_included": false,
+      "model_egress": "approved_governed_api"
+    },
+    {
+      "schema_version": "subc-v3-event/1",
+      "event_id": "evt_3333333333333333",
+      "event_type": "memory_signal",
+      "lane": "scout",
+      "source": {"source_class": "memory_projection", "source_ref_hash": "sha256:3333333333333333333333333333333333333333333333333333333333333333", "observed_at": "2026-06-20T10:00:00Z", "authority": "projection", "privacy_class": "yellow"},
+      "evidence": [{"fingerprint": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc", "kind": "redacted_summary", "safe_summary": "Client payment follow-up is tracked manually across several outcomes"}],
+      "raw_content_included": false,
+      "model_egress": "approved_governed_api"
+    },
+    {
+      "schema_version": "subc-v3-event/1",
+      "event_id": "evt_4444444444444444",
+      "event_type": "unfinished_work",
+      "lane": "scout",
+      "source": {"source_class": "project_state", "source_ref_hash": "sha256:4444444444444444444444444444444444444444444444444444444444444444", "observed_at": "2026-06-24T10:00:00Z", "authority": "canonical_state", "privacy_class": "yellow"},
+      "evidence": [{"fingerprint": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd", "kind": "redacted_summary", "safe_summary": "A follow-up checklist remains unfinished after successful payment"}],
+      "raw_content_included": false,
+      "model_egress": "approved_governed_api"
+    },
+    {
+      "schema_version": "subc-v3-event/1",
+      "event_id": "evt_5555555555555555",
+      "event_type": "service_health",
+      "lane": "guardian",
+      "source": {"source_class": "service_probe", "source_ref_hash": "sha256:5555555555555555555555555555555555555555555555555555555555555555", "observed_at": "2026-06-25T10:00:00Z", "authority": "probe", "privacy_class": "yellow"},
+      "evidence": [{"fingerprint": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", "kind": "probe_result", "safe_summary": "Service is healthy"}],
+      "raw_content_included": false,
+      "model_egress": "disabled"
+    }
+  ]
+}

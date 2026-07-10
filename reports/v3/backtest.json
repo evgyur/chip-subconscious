@@ -1,0 +1,58 @@
+{
+  "corpus_fingerprint": "sha256:09de50884f0dcf51b7ee53b1dc0c8c3d1a16e0cba771412bdf16bebc9a63cb57",
+  "corpus_label_counts": {
+    "complaints": 4,
+    "duplicate_evidence": 1,
+    "guardian_snapshots": 5,
+    "repeated_work": 2,
+    "scout_context_events": 5
+  },
+  "failed_gates": [],
+  "goal_id": "sg-20260710-subconscious-v3-product-reset",
+  "privacy_finding_count": 0,
+  "privacy_scan_pass": true,
+  "rollout_gate_pass": true,
+  "schema_version": "subc-v3-backtest-report/1",
+  "separation": {
+    "guardian_visible_proposals": 0,
+    "reflex_telegram_deliveries": 0,
+    "scout_static_health_inputs": 0
+  },
+  "thresholds": {
+    "max_duplicate_visible_output_rate": 0.2,
+    "max_identical_evidence_score_inflation": 0,
+    "min_complaint_recall": 1.0,
+    "min_proactive_domain_proposals": 1,
+    "min_repeated_work_recall": 1.0,
+    "min_useful_approvable_rate": 0.5
+  },
+  "v2": {
+    "distinct_output_families": 3,
+    "duplicate_visible_output_rate": 0.5,
+    "empty_walks": 86,
+    "internal_infrastructure_share": 1.0,
+    "proactive_domain_proposals": 0,
+    "rollout_gate_pass": false,
+    "scheduled_walks": 92,
+    "surfaced_outputs": 6
+  },
+  "v3": {
+    "canonical_memory_writes": 0,
+    "complaint_recall": 1.0,
+    "duplicate_visible_output_rate": 0.0,
+    "guardian_state_changes": 2,
+    "identical_evidence_replay_count": 1,
+    "identical_evidence_score_inflation": 0,
+    "proactive_domain_proposals": 2,
+    "reactive_label_count": 6,
+    "repeated_work_recall": 1.0,
+    "telegram_deliveries": 0,
+    "useful_approvable_count": 2,
+    "useful_approvable_rate": 1.0,
+    "visible_proposal_count": 2
+  },
+  "window": {
+    "end": "2026-07-10T23:59:59Z",
+    "start": "2026-06-10T00:00:00Z"
+  }
+}

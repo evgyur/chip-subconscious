@@ -1,0 +1,39 @@
+{
+  "schema_version": "subc-v3-backtest-manifest/1",
+  "goal_id": "sg-20260710-subconscious-v3-product-reset",
+  "window": {"start": "2026-06-10T00:00:00Z", "end": "2026-07-10T23:59:59Z"},
+  "privacy": {
+    "raw_chat_included": false,
+    "private_identifiers_included": false,
+    "source_refs": "sha256 only",
+    "summaries": "redacted regression labels only"
+  },
+  "audit_evidence_sha256": [
+    "c3f2b05da6f1ee06c9305657a74556a758d4e1b167884505e57e4ab79f7e808f",
+    "5fc3c7af4e4e05c4f929317c598046ef15382cbc21239734df7daafa473633e6",
+    "5417aafd698f5604c98b7b60216a1930bd5099845cf52e2d49205e8fe1f2ffff"
+  ],
+  "domain_source_pointer_hashes": [
+    "866efabcd251738aad3d2d4b4f4b50c7d5ace720bc9ff1b76ce087ddd684be83",
+    "b6cd9b7bce219711a630cda061d29d4b35fb48a51e16993c09b2cd17bb976849",
+    "b2a5cf38389964075c9ea67961315ef6075b8f7f769e47a228aa5f2956ed3a88"
+  ],
+  "v2_frozen_baseline": {
+    "scheduled_walks": 92,
+    "empty_walks": 86,
+    "surfaced_outputs": 6,
+    "distinct_output_families": 3,
+    "duplicate_visible_output_rate": 0.5,
+    "proactive_domain_proposals": 0,
+    "internal_infrastructure_share": 1.0,
+    "rollout_gate_pass": false
+  },
+  "thresholds": {
+    "max_duplicate_visible_output_rate": 0.2,
+    "min_complaint_recall": 1.0,
+    "min_repeated_work_recall": 1.0,
+    "min_useful_approvable_rate": 0.5,
+    "min_proactive_domain_proposals": 1,
+    "max_identical_evidence_score_inflation": 0
+  }
+}

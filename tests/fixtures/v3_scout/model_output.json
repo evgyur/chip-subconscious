@@ -1,0 +1,54 @@
+{
+  "schema_version": "subc-v3-scout-evaluation/1",
+  "status": "ok",
+  "proposals": [
+    {
+      "evidence_event_ids": ["evt_1111111111111111", "evt_2222222222222222"],
+      "single_source_exception": false,
+      "exception_reason": "",
+      "proposal": {
+        "schema_version": "subc-v3-lane-output/1",
+        "output_type": "scout_proposal",
+        "proposal_instance_id": "prp_1111111111111111",
+        "problem_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "domain": "human20",
+        "title": "Turn lesson publishing checks into one verified checklist",
+        "why_now": "Two independent project signals show the same recurring manual quality step",
+        "expected_value": "Reduce operator time and lower the chance of publishing an incomplete lesson",
+        "effort": "small",
+        "risk": "low",
+        "confidence": 0.86,
+        "cheap_test": "Replay three recent redacted publishing outcomes against a local checklist",
+        "evidence": [
+          {"fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "safe_ref": "event:evt_1111111111111111"},
+          {"fingerprint": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", "safe_ref": "event:evt_2222222222222222"}
+        ],
+        "writes_canonical_memory": false
+      }
+    },
+    {
+      "evidence_event_ids": ["evt_3333333333333333", "evt_4444444444444444"],
+      "single_source_exception": false,
+      "exception_reason": "",
+      "proposal": {
+        "schema_version": "subc-v3-lane-output/1",
+        "output_type": "scout_proposal",
+        "proposal_instance_id": "prp_2222222222222222",
+        "problem_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "domain": "business",
+        "title": "Test a payment-to-follow-up completion checklist",
+        "why_now": "A governed preference signal and unfinished project state point to the same manual gap",
+        "expected_value": "Reduce missed client follow-up and make paid outcomes easier to close consistently",
+        "effort": "small",
+        "risk": "low",
+        "confidence": 0.81,
+        "cheap_test": "Apply the checklist to five synthetic payment outcomes without sending messages",
+        "evidence": [
+          {"fingerprint": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc", "safe_ref": "event:evt_3333333333333333"},
+          {"fingerprint": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd", "safe_ref": "event:evt_4444444444444444"}
+        ],
+        "writes_canonical_memory": false
+      }
+    }
+  ]
+}

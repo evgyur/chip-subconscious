@@ -1,0 +1,30 @@
+{
+  "schema_version": "subc-v3-backtest-rubric/1",
+  "review_basis": "frozen redacted product audit labels",
+  "reactive_labels": [
+    {"event_id": "evt_aaaaaaaaaaaaaaaa", "label_kind": "complaint", "expected_class": "no_results"},
+    {"event_id": "evt_bbbbbbbbbbbbbbbb", "label_kind": "complaint", "expected_class": "no_results"},
+    {"event_id": "evt_cccccccccccccccc", "label_kind": "repeated_work", "expected_class": "repeated_question"},
+    {"event_id": "evt_dddddddddddddddd", "label_kind": "complaint", "expected_class": "prevention_request"},
+    {"event_id": "evt_eeeeeeeeeeeeeeee", "label_kind": "complaint", "expected_class": "no_value"},
+    {"event_id": "evt_ffffffffffffffff", "label_kind": "duplicate_evidence", "duplicate_of": "evt_aaaaaaaaaaaaaaaa"},
+    {"event_id": "evt_7777777777777777", "label_kind": "repeated_work", "expected_class": "repeated_manual_work"}
+  ],
+  "proposal_labels": [
+    {
+      "problem_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "expected_domain": "human20",
+      "useful": true,
+      "approvable": true,
+      "reason_code": "reduces_recurring_product_quality_work"
+    },
+    {
+      "problem_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "expected_domain": "business",
+      "useful": true,
+      "approvable": true,
+      "reason_code": "closes_recurring_business_followup_gap"
+    }
+  ],
+  "guardian_expected_changes": 2
+}

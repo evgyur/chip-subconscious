@@ -1,0 +1,12 @@
+{
+  "schema_version": "subc-v3-scout-config/1",
+  "provider": "hermes-approved-route",
+  "route": "current-approved",
+  "max_input_events": 20,
+  "max_context_chars": 6000,
+  "max_prompt_tokens": 900,
+  "timeout_ms": 45000,
+  "max_proposals": 3,
+  "min_confidence": 0.7,
+  "allow_single_source_exception": true
+}
