@@ -32,6 +32,11 @@ def _fingerprint(component: str, state: str, observed_at: str) -> str:
     return "sha256:" + hashlib.sha256(f"{component}|{state}|{observed_at}".encode()).hexdigest()
 
 
+def _invalidate_model_output(runtime: Path) -> None:
+    """Require every cycle to produce a fresh evaluator response."""
+    (runtime / "model_output.json").unlink(missing_ok=True)
+
+
 def prepare_runtime(
     runtime_dir: str | Path,
     *,
@@ -43,6 +48,7 @@ def prepare_runtime(
 ) -> dict[str, Any]:
     runtime = Path(runtime_dir)
     runtime.mkdir(parents=True, exist_ok=True)
+    _invalidate_model_output(runtime)
     context = project_recent_messages(state_db, config, since_timestamp=since_timestamp, limit=60)
     reflex_events = [event for event in context["events"] if event["lane"] == "reflex"]
     scout_events = [event for event in context["events"] if event["lane"] == "scout"]

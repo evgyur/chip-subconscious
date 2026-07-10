@@ -30,6 +30,8 @@ test -n "${SUBC_V3_DELIVERY_TARGET:-}" || exit 2
 python3 scripts/subc_v3_prepare_runtime.py --runtime-dir "$RUNTIME" --since-hours 48
 ```
 
+This command invalidates any previous `model_output.json`. Every cycle must therefore write a fresh evaluator response; stale proposals may never be reused.
+
 2. Read `$RUNTIME/context_pack.json`. Evaluate only events whose lane is `scout`. Ignore one-shot commands, static health, system prompts, compaction, images, unrelated senders, and direct corrections.
 
 3. Write `$RUNTIME/model_output.json` using `subc-v3-scout-evaluation/1`:
