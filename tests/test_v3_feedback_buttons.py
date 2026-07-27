@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from subc_v3_feedback import record_feedback
-from subc_v3_telegram import _api_call, apply_markup, callback_markup, parse_target
+from subc_v3_telegram import _api_call, apply_markup, callback_markup, parse_target, validate_single_suggestion
 
 
 class V3FeedbackTests(unittest.TestCase):
@@ -77,6 +77,34 @@ class V3ButtonTests(unittest.TestCase):
         self.assertEqual(parse_target("telegram:-100123:1551"), ("-100123", 1551))
         with self.assertRaises(ValueError):
             parse_target("local")
+
+    def test_telegram_message_contains_exactly_one_suggestion(self):
+        one = """🧠 SUBCONSCIOUS v3
+
+➊ Одна идея
+┈ почему сейчас: сигнал
+┈ ценность: результат
+┈ effort / risk / confidence: small / low / 0.8
+┈ дешёвый тест: проверить
+┈ выбери действие кнопкой ниже
+"""
+        self.assertIsNone(validate_single_suggestion(one))
+        with self.assertRaisesRegex(ValueError, "exactly one suggestion"):
+            validate_single_suggestion(one + "\n➋ Другая идея\n┈ почему сейчас: другой сигнал\n")
+
+    def test_telegram_message_rejects_multiple_why_now_blocks_without_numbered_marker(self):
+        text = """🧠 SUBCONSCIOUS v3
+
+➊ Одна идея
+┈ почему сейчас: сигнал
+┈ почему сейчас: скрытая вторая идея
+┈ ценность: результат
+┈ effort / risk / confidence: small / low / 0.8
+┈ дешёвый тест: проверить
+┈ выбери действие кнопкой ниже
+"""
+        with self.assertRaisesRegex(ValueError, "exactly one suggestion"):
+            validate_single_suggestion(text)
 
     def test_reapplying_identical_markup_is_idempotent(self):
         body = io.BytesIO(json.dumps({

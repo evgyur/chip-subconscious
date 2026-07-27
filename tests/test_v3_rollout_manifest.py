@@ -129,7 +129,15 @@ class V3RolloutManifestTests(unittest.TestCase):
         self.assertIn("button_count", prompt)
         self.assertIn("fetch back", prompt.lower())
         self.assertLess(prompt.index(send_command), prompt.rindex("--commit"))
+
+    def test_cron_contract_forbids_bundled_suggestions(self):
+        prompt = (ROOT / "docs/v3/cron-prompt.md").read_text()
+        self.assertIn("one proposal per Telegram message", prompt)
+        self.assertIn("Never bundle", prompt)
+        self.assertIn("outbound-$PROPOSAL_ID.md", prompt)
+        self.assertIn("send-result-$PROPOSAL_ID.json", prompt)
         self.assertIn("cron delivery is `local`", prompt.lower())
+        self.assertIn("never propose deliberate re-exposure", prompt.lower())
 
 
 if __name__ == "__main__":

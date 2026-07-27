@@ -32,6 +32,21 @@ def callback_markup(proposal_instance_id: str) -> dict[str, Any]:
     return {"inline_keyboard": [buttons[:2], buttons[2:5], buttons[5:]]}
 
 
+def validate_single_suggestion(text: str) -> None:
+    """Fail closed if one Telegram message contains zero or multiple proposals."""
+    required_blocks = (
+        r"(?m)^➊\s+\S",
+        r"(?m)^┈ почему сейчас:\s+\S",
+        r"(?m)^┈ ценность:\s+\S",
+        r"(?m)^┈ effort / risk / confidence:\s+\S",
+        r"(?m)^┈ дешёвый тест:\s+\S",
+        r"(?m)^┈ выбери действие кнопкой ниже\s*$",
+    )
+    has_secondary_marker = bool(re.search(r"(?m)^[➋➌➍➎➏➐➑➒]\s+\S", text))
+    if has_secondary_marker or any(len(re.findall(pattern, text)) != 1 for pattern in required_blocks):
+        raise ValueError("Telegram proposal must contain exactly one suggestion")
+
+
 def parse_target(target: str) -> tuple[str, int | None]:
     match = re.fullmatch(r"telegram:(-?\d+)(?::(\d+))?", target.strip())
     if not match:
@@ -109,6 +124,7 @@ def apply_markup(
     if message_id is None:
         if not text:
             raise ValueError("text is required for send")
+        validate_single_suggestion(text)
         result = _api_call(token, "sendMessage", {
             "chat_id": chat_id,
             "message_thread_id": thread_id,

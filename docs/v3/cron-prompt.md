@@ -33,6 +33,7 @@ python3 scripts/subc_v3_prepare_runtime.py --runtime-dir "$RUNTIME" --since-hour
 This command invalidates any previous `model_output.json`. Every cycle must therefore write a fresh evaluator response; stale proposals may never be reused.
 
 2. Read `$RUNTIME/context_pack.json`. Evaluate only events whose lane is `scout`. Ignore one-shot commands, static health, system prompts, compaction, images, unrelated senders, and direct corrections.
+   - Health safety gate: never propose deliberate re-exposure, self-challenge, or unsupervised testing of a suspected allergen or acute trigger. Prefer avoidance, symptom logging, and qualified clinical review.
 
 3. Write `$RUNTIME/model_output.json` using `subc-v3-scout-evaluation/1`:
    - status `empty` with no proposals when evidence is weak;
@@ -61,7 +62,8 @@ python3 scripts/subc_delivery_gate.py \
 6. Read `$RUNTIME/delivery-gate.json`.
    - If `silent=true`, return exactly `[SILENT]` and nothing else.
    - If Guardian has a real state transition, keep it separate; never call it a Scout proposal.
-   - Otherwise format each allowed proposal into `$RUNTIME/outbound.md`:
+   - Otherwise create one outbound file for every allowed proposal: `$RUNTIME/outbound-<proposal_instance_id>.md`.
+   - **Hard invariant: one proposal per Telegram message. Never bundle, digest, concatenate, or number several suggestions in one message.** Every file must contain exactly one `➊` block and its own proposal ID/button set:
 
 ```text
 🧠 SUBCONSCIOUS v3
@@ -74,16 +76,23 @@ python3 scripts/subc_delivery_gate.py \
 ┈ выбери действие кнопкой ниже
 ```
 
-7. Send only the prepared file through the dedicated Telegram adapter. The adapter verifies the configured bot with `getMe`, sends the proposal, and attaches six inline buttons (`Accept`, `Reject`, `Skip`, `Save`, `Mute`, `Deep dive`) bound to the exact proposal instance ID:
+7. Send every prepared file separately through the dedicated Telegram adapter. The adapter verifies the configured bot with `getMe`, rejects zero/multiple suggestions in one file, sends the single proposal, and attaches six inline buttons (`Accept`, `Reject`, `Skip`, `Save`, `Mute`, `Deep dive`) bound to that exact proposal instance ID:
 
 ```bash
-PROPOSAL_ID="$(python3 -c 'import json,sys; p=json.load(open(sys.argv[1])); print(p["allowed_proposals"][0]["proposal_instance_id"])' "$RUNTIME/delivery-gate.json")"
-python3 scripts/subc_v3_telegram.py send \
-  --target "$SUBC_V3_DELIVERY_TARGET" \
-  --proposal-id "$PROPOSAL_ID" \
-  --text-file "$RUNTIME/outbound.md" \
-  --expected-bot-username "${SUBC_V3_EXPECTED_BOT_USERNAME:?missing expected bot username}" \
-  --output "$RUNTIME/send-result.json"
+python3 - "$RUNTIME/delivery-gate.json" <<'PY' > "$RUNTIME/allowed-proposal-ids.txt"
+import json, sys
+for item in json.load(open(sys.argv[1]))["allowed_proposals"]:
+    print(item["proposal_instance_id"])
+PY
+
+while IFS= read -r PROPOSAL_ID; do
+  python3 scripts/subc_v3_telegram.py send \
+    --target "$SUBC_V3_DELIVERY_TARGET" \
+    --proposal-id "$PROPOSAL_ID" \
+    --text-file "$RUNTIME/outbound-$PROPOSAL_ID.md" \
+    --expected-bot-username "${SUBC_V3_EXPECTED_BOT_USERNAME:?missing expected bot username}" \
+    --output "$RUNTIME/send-result-$PROPOSAL_ID.json"
+done < "$RUNTIME/allowed-proposal-ids.txt"
 ```
 
 Treat a non-zero exit, malformed JSON, missing positive Telegram message ID, `button_count != 6`, or mismatched outbound content hash as a failed send. Do not commit delivery state on failure. During rollout, the standard `/goal` executor must fetch back the exact message through the canonical read-only telegram-chip runtime before accepting the canary.
